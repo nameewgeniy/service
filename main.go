@@ -10,6 +10,13 @@ import (
 
 var conn *pgx.Conn
 
+type Data struct {
+	ID      int
+	Doamin  string `json:"domain"`
+	Content string `json:"content"`
+	Date    string `json:"date"`
+}
+
 func main() {
 
 	conn, err := pgx.Connect(context.Background(), "host=localhost user=go_user password=go_password dbname=go_test_db port=9190")
@@ -20,14 +27,7 @@ func main() {
 	}
 	defer conn.Close(context.Background())
 
-	type Data struct {
-		ID      int
-		Doamin  string `json:"domain"`
-		Content string `json:"content"`
-		Date    string `json:"date"`
-	}
-
-	fmt.Println(result)
+	getDomain()
 }
 
 func addDomain() error {
@@ -35,7 +35,7 @@ func addDomain() error {
 	return err
 }
 
-func getDomain() error {
+func getDomain() Data {
 
 	var result Data
 
@@ -44,4 +44,6 @@ func getDomain() error {
 		fmt.Fprintf(os.Stderr, "QueryRow failed: %v\n", err)
 		os.Exit(1)
 	}
+
+	return result
 }
