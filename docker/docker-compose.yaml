@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  go_db:
+    image: wodby/postgres:11
+    stop_grace_period: 30s
+    environment:
+      POSTGRES_MAX_CONNECTIONS: 1000
+      POSTGRES_PASSWORD: go_password
+      POSTGRES_USER: go_user
+      POSTGRES_MULTIPLE_DATABASES: go_db, go_test_db
+    ports:
+      - 9190:5432
+    volumes:
+      - ./postgresql:/docker-entrypoint-initdb.d
+      - ../../postgresql/go:/var/lib/postgresql/data
