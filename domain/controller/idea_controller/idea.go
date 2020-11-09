@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"service/domain/dto"
+	"service/domain/repository/idea_repository"
 	"service/domain/service/idea_service"
 )
 
@@ -17,7 +18,7 @@ var GetIdeas = func(c *gin.Context) {
 		return // or continue, etc.
 	}
 
-	result := idea_service.GetIdeas(&query)
+	result := idea_repository.GetItems(&query)
 
 	c.JSON(http.StatusOK, result)
 }

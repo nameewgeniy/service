@@ -38,7 +38,6 @@ func GetItems(query *dto.ListQuery) []Idea{
 			fmt.Printf("Error")
 		}
 
-		fmt.Println(idea.ID)
 		ideas = append(ideas, idea)
 	}
 
