@@ -13,7 +13,7 @@ func InitRoutes(cf *ConfigController)  {
 
 	// Список всех идей
 	cf.Server.GET("/ideas", idea_controller.GetIdeas)
-
+	cf.Server.GET("/create", idea_controller.CreateIdea)
 }
 
 

@@ -1,1 +1,1 @@
-DELETE TABLE "products" ;
+DROP TABLE "ideas" ;
