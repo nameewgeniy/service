@@ -15,3 +15,8 @@ func CreateIdea(idea entity.Idea)  {
 
 	repository.CreateIdea(idea)
 }
+
+func UpdateIdea(idea entity.Idea)  {
+
+	repository.UpdateIdea(idea)
+}

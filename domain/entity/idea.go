@@ -3,7 +3,7 @@ package entity
 import "time"
 
 type Idea struct {
-	ID int `form:"id"`
-	Title string `form:"title"`
+	ID int
+	Title string `form:"title" binding:"required"`
 	CreatedAt time.Time
 }

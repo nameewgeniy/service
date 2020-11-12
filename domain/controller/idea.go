@@ -7,6 +7,7 @@ import (
 	"service/domain/entity"
 	"service/domain/repository"
 	"service/domain/service"
+	"strconv"
 )
 
 var GetIdeas = func(c *gin.Context) {
@@ -34,4 +35,23 @@ var CreateIdea = func(c *gin.Context) {
 	}
 
 	service.CreateIdea(idea)
+}
+
+var UpdateIdea = func(c *gin.Context) {
+
+
+	var idea entity.Idea
+	err := c.Bind(&idea)
+
+	if err != nil {
+		return // or continue, etc.
+	}
+
+	idea.ID, err = strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return // or continue, etc.
+	}
+
+	service.UpdateIdea(idea)
 }
