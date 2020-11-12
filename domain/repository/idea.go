@@ -1,30 +1,17 @@
-package idea_repository
+package repository
 
 import (
 	"context"
 	"fmt"
 	"os"
 	"service/domain/dto"
-	"service/domain/repository"
-	"time"
+	"service/domain/entity"
 )
 
-var config *repository.ConfigRepository
+func GetItemsIdeas(query *dto.ListQuery) []entity.Idea {
 
-type Idea struct {
-	ID int
-	Title string
-	CreatedAt time.Time
-}
-
-func SetConfig(configRep *repository.ConfigRepository)  {
-	config = configRep
-}
-
-func GetItems(query *dto.ListQuery) []Idea{
-
-	var ideas []Idea
-	var idea Idea
+	var ideas []entity.Idea
+	var idea entity.Idea
 
 	sql := "SELECT id, title, created_at FROM ideas t LIMIT $1"
 
@@ -44,7 +31,7 @@ func GetItems(query *dto.ListQuery) []Idea{
 	return ideas
 }
 
-func Create(i Idea) {
+func CreateIdea(i entity.Idea) {
 
 	sql := "INSERT INTO ideas (title) values ($1)"
 

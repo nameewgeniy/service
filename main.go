@@ -5,7 +5,6 @@ import (
 	"service/db"
 	"service/domain/controller"
 	"service/domain/repository"
-	"service/domain/repository/idea_repository"
 )
 
 func main() {
@@ -19,14 +18,14 @@ func main() {
 	}
 
 	// Init Repositories
-	idea_repository.SetConfig(&configRep)
+	repository.InitConfig(&configRep)
 
 	// Initial Server
 	configCont := controller.ConfigController{
 		Server: gin.Default(),
 	}
 
-	controller.InitRoutes(&configCont)
+	controller.InitConfig(&configCont)
 
 	configCont.Server.Run()
 }

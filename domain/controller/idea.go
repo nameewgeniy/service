@@ -1,11 +1,12 @@
-package idea_controller
+package controller
 
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"service/domain/dto"
-	"service/domain/repository/idea_repository"
-	"service/domain/service/idea_service"
+	"service/domain/entity"
+	"service/domain/repository"
+	"service/domain/service"
 )
 
 var GetIdeas = func(c *gin.Context) {
@@ -18,12 +19,19 @@ var GetIdeas = func(c *gin.Context) {
 		return // or continue, etc.
 	}
 
-	result := idea_repository.GetItems(&query)
+	result := repository.GetItemsIdeas(&query)
 
 	c.JSON(http.StatusOK, result)
 }
 
 var CreateIdea = func(c *gin.Context) {
 
-	idea_service.CreateIdea()
+	var idea entity.Idea
+	err := c.Bind(&idea)
+
+	if err != nil {
+		return // or continue, etc.
+	}
+
+	service.CreateIdea(idea)
 }

@@ -7,3 +7,9 @@ import (
 type ConfigRepository struct {
 	DB *pgx.Conn
 }
+
+var config *ConfigRepository
+
+func InitConfig(cf *ConfigRepository)  {
+	config = cf
+}
